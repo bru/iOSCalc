@@ -15,6 +15,7 @@
   UIButton *minusButton;
   UIButton *multiplyButton;
   UIButton *divideButton;
+  UIButton *powerButton;
   NSString *oper;
   float buffer, rightOp;
     
@@ -25,6 +26,7 @@
 @property (retain) IBOutlet UIButton *minusButton;
 @property (retain) IBOutlet UIButton *multiplyButton;
 @property (retain) IBOutlet UIButton *divideButton;
+@property (retain) IBOutlet UIButton *powerButton;
 
 - (IBAction)addDigit:(id) sender;
 - (IBAction)setOperator: (id) sender;

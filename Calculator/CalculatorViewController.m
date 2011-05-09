@@ -10,7 +10,7 @@
 
 @implementation CalculatorViewController
 
-@synthesize display, plusButton, minusButton, multiplyButton, divideButton;
+@synthesize display, plusButton, minusButton, multiplyButton, divideButton, powerButton;
 
 - (void)dealloc
 {
@@ -105,7 +105,10 @@
     value = buffer * rightOp;
   }
   if ([oper isEqualToString: @"÷"]) {
-    value = buffer / rightOp;
+    value = result / rightOp;
+  }
+  if ([oper isEqualToString: @"^"]) {
+    value = pow(result, rightOp);
   }
   if ([oper isEqualToString: @"±"]) { 
     value = (-1 * buffer);
