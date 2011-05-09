@@ -32,11 +32,7 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  [display setText:@"0"];
-  buffer = 0;
-  rightOp = 0;
-  display.borderStyle = UITextBorderStyleRoundedRect;
-  
+  [self reset];
 }
 
 
@@ -54,20 +50,25 @@
 }
 
 - (IBAction)addDigit:(id)sender {
-  NSString *digit = [sender currentTitle];
   NSString *current = [display text];
-  if ([current isEqualToString:@"0"] && ![digit isEqualToString:@"."]) {
+  NSString *digit = [sender currentTitle];
+  if ([digit isEqualToString:@"."] && clean) {
+    digit = [NSString stringWithString: @"0."];
+  }
+  if ([current isEqualToString:@"0"] || clean) {
     current = digit;
   } else {
     current = [current stringByAppendingString:digit];
   }
+  clean = false;
   rightOp = [current floatValue];
   [display setText: (NSString *)current];
 }
 
 - (IBAction)setOperator:(id)sender {
+  [self resolveOperation:sender];
   buffer = [[display text] floatValue];
-  [display setText:@"0"];
+  // [display setText:@"0"];
   oper = [sender currentTitle];
   
   [plusButton setSelected: NO];
@@ -83,14 +84,20 @@
 }
 
 - (IBAction)clear:(id)sender {
+  [self reset];
+}
+
+- (void)reset {
   buffer = rightOp = 0;
-  oper = nil;
+  oper = @"+";
+  clean = true;
   
   [plusButton setSelected: NO];
   [minusButton setSelected: NO];
   [multiplyButton setSelected: NO];
   [divideButton setSelected: NO];
   [display setText:@"0"];
+  
 }
 
 - (IBAction)resolveOperation:(id)sender {
@@ -104,18 +111,19 @@
   if ([oper isEqualToString: @"*"]) {
     value = buffer * rightOp;
   }
-  if ([oper isEqualToString: @"Ã·"]) {
-    value = result / rightOp;
+  if ([oper isEqualToString: @"Ö"]) {
+    value = buffer / rightOp;
   }
   if ([oper isEqualToString: @"^"]) {
-    value = pow(result, rightOp);
+    value = pow(buffer, rightOp);
   }
-  if ([oper isEqualToString: @"Â±"]) { 
+  if ([oper isEqualToString: @"±"]) { 
     value = (-1 * buffer);
   }
   
   
   buffer = value;
+  clean = true;
   [display setText:[[NSNumber numberWithFloat:value] stringValue]]; 
 }
 

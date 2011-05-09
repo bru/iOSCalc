@@ -11,7 +11,7 @@ When /^I touch the equal button$/ do
 end
 
 Then /^I should see (\d+) on the display$/ do |result|
-  display = frankly_map("textField marked:'display'", "text").first
+  display = frankly_map("label marked:'display'", "text").first
   display.should == result
 end
 

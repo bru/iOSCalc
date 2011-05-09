@@ -10,7 +10,7 @@
 
 @interface CalculatorViewController : UIViewController {
   
-  UITextField *display;
+  UILabel *display;
   UIButton *plusButton;
   UIButton *minusButton;
   UIButton *multiplyButton;
@@ -18,10 +18,11 @@
   UIButton *powerButton;
   NSString *oper;
   float buffer, rightOp;
+  bool clean;
     
 }
 
-@property (retain) IBOutlet UITextField *display;
+@property (retain) IBOutlet UILabel *display;
 @property (retain) IBOutlet UIButton *plusButton;
 @property (retain) IBOutlet UIButton *minusButton;
 @property (retain) IBOutlet UIButton *multiplyButton;
@@ -33,6 +34,7 @@
 - (IBAction)unaryOperator: (id) sender;
 - (IBAction)resolveOperation: (id) sender;
 - (IBAction)clear: (id) sender;
+- (void)reset;
 
 
 @end
