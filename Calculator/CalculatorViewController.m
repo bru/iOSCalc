@@ -67,8 +67,7 @@
 
 - (IBAction)setOperator:(id)sender {
   [self resolveOperation:sender];
-  buffer = [[display text] floatValue];
-  // [display setText:@"0"];
+  leftOp = [[display text] floatValue];
   oper = [sender currentTitle];
   
   [plusButton setSelected: NO];
@@ -88,8 +87,8 @@
 }
 
 - (void)reset {
-  buffer = rightOp = 0;
-  oper = @"+";
+  leftOp = rightOp = 0;
+  oper = nil;
   clean = true;
   
   [plusButton setSelected: NO];
@@ -101,30 +100,29 @@
 }
 
 - (IBAction)resolveOperation:(id)sender {
-  float value = buffer;
+  float value = rightOp;
   if ([oper isEqualToString: @"+"]) {
-    value = buffer + rightOp;
+    value = leftOp + rightOp;
   }
   if ([oper isEqualToString: @"-"]) {
-    value = buffer - rightOp;
+    value = leftOp - rightOp;
   }
   if ([oper isEqualToString: @"*"]) {
-    value = buffer * rightOp;
+    value = leftOp * rightOp;
   }
   if ([oper isEqualToString: @"Ö"]) {
-    value = buffer / rightOp;
+    value = leftOp / rightOp;
   }
   if ([oper isEqualToString: @"^"]) {
-    value = pow(buffer, rightOp);
+    value = pow(leftOp, rightOp);
   }
   if ([oper isEqualToString: @"±"]) { 
-    value = (-1 * buffer);
+    value = (-1 * leftOp);
   }
   
-  
-  buffer = value;
+  leftOp = value;
   clean = true;
-  [display setText:[[NSNumber numberWithFloat:value] stringValue]]; 
+  [display setText:[[NSNumber numberWithFloat:leftOp] stringValue]]; 
 }
 
 @end

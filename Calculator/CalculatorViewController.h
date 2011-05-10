@@ -17,7 +17,7 @@
   UIButton *divideButton;
   UIButton *powerButton;
   NSString *oper;
-  float buffer, rightOp;
+  float leftOp, rightOp;
   bool clean;
     
 }
