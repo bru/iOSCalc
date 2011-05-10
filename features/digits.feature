@@ -44,3 +44,12 @@ Feature: As a User pressing the digits on the calculator I want to see the numbe
     Then I should see 0. on the display
     When I touch the 1 button
     Then I should see 0.1 on the display
+
+  Scenario: testing equal on a null operation
+    Given I launch the app
+    When I touch the 1 button
+    And I touch the 2 button
+    And I touch the equal button
+    Then I should see 12 on the display
+    When I touch the equal button 
+    Then I should see 12 on the display
